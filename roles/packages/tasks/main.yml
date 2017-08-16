@@ -1,0 +1,42 @@
+---
+- name: Install deb packages with apt-get
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - "{{ pkg_apt }}"
+
+- name: Download files
+  get_url:
+    url: "{{ item }}"
+    dest: "{{ tmpdir }}/{{ item | basename }}"
+  with_items:
+    - "{{ vagrant_url }}"
+    - "{{ virtualbox_pack_url }}"
+
+- name: Install deb packages with dpkg
+  apt:
+    deb: "{{ item }}"
+  with_items:
+    - "{{ tmpdir }}/{{ vagrant_url | basename }}"
+
+- name: Check if VirtualBox Extension pack is installed
+  shell: >
+    vboxmanage list extpacks | grep -q {{ virtualbox_version | regex_replace('^(.*)-.*', '\1') }}
+  register: extension_is_installed
+  changed_when: extension_is_installed.rc == 1
+  failed_when: extension_is_installed.rc == 2 or extension_is_installed.stderr != ""
+
+- name: Install VirtualBox Extension Pack
+  shell: >
+    yes y | vboxmanage extpack install {{ tmpdir }}/{{ virtualbox_pack_url | basename }}
+  no_log: True
+  when: extension_is_installed.rc == 1
+
+- name: Install python packages
+  pip:
+    name: "{{ item }}"
+    extra_args: --user
+  become: False
+  with_items:
+    - "{{ pkg_pip }}"

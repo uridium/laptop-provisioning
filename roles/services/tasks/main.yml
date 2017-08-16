@@ -1,0 +1,17 @@
+---
+- name: Add cron entries
+  cron:
+    name: "{{ item }} firefox databases"
+    special_time: reboot
+    job: "find ~/.mozilla -type f -name *.sqlite | xargs -i sqlite3 {} {{ item }}"
+  become: False
+  with_items:
+    - vacuum
+    - reindex
+
+- name: Configure rng-tools
+  lineinfile:
+    path: /etc/default/rng-tools
+    regexp: "^HRNGDEVICE="
+    line: "HRNGDEVICE=/dev/urandom"
+  notify: restart-rng-tools

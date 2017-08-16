@@ -1,0 +1,25 @@
+---
+- name: Configure grub timeout
+  lineinfile:
+    path: /etc/default/grub
+    regexp: "^GRUB_TIMEOUT="
+    line: "GRUB_TIMEOUT=3"
+  notify: update-grub
+
+- name: Configure grub cmdline
+  lineinfile:
+    path: /etc/default/grub
+    regexp: "^GRUB_CMDLINE_LINUX_DEFAULT="
+    line: "GRUB_CMDLINE_LINUX_DEFAULT='ipv6.disable=1'"
+  notify: update-grub
+
+- name: Comment out deprecated grub params
+  lineinfile:
+    path: /etc/default/grub
+    regexp: "{{ item }}"
+    line: '# \1'
+    backrefs: yes
+  notify: update-grub
+  with_items:
+    - "(^GRUB_HIDDEN_TIMEOUT=.*)"
+    - "(^GRUB_HIDDEN_TIMEOUT_QUIET=.*)"

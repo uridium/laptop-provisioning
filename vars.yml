@@ -1,0 +1,46 @@
+virtualbox_version: "5.1.26-117224"
+virtualbox_pack_url: "http://download.virtualbox.org/virtualbox/{{ virtualbox_version | regex_replace('^(.*)-.*', '\\1') }}/Oracle_VM_VirtualBox_Extension_Pack-{{ virtualbox_version }}.vbox-extpack"
+vagrant_version: "1.9.7"
+vagrant_url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_{{ ansible_architecture }}.deb"
+
+tmpdir: /tmp
+
+pkg_apt:
+  - apt-file
+  - audacious
+  - bwm-ng
+  - chromium-browser
+  - claws-mail
+  - colordiff
+  - git
+  - git-crypt
+  - gnupg2
+  - gnupg-agent
+  - jq
+  - links
+  - mtr-tiny
+  - ngrep
+  - pass
+  - pwgen
+  - redshift
+  - rng-tools
+  - sipcalc
+  - slack-desktop
+  - sqlite3
+  - terminator
+  - tree
+  - vim
+  - virtualbox-5.1={{ virtualbox_version }}~Ubuntu~xenial
+  - whois
+  - wireshark
+
+pkg_pip:
+  - awscli
+  - awsebcli
+  - aws-tools
+  - pip
+  - pyotp
+  - pyperclip
+  - setuptools
+  - sshuttle
+  - wheel

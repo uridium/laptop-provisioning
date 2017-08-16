@@ -1,0 +1,11 @@
+---
+- hosts: laptop
+  become: True
+  gather_facts: True
+  vars_files:
+    - vars.yml
+  roles:
+    - repositories
+    - packages
+    - services
+    - grub
