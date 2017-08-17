@@ -1,8 +1,12 @@
 ---
+- name: Update repo indexes
+  apt:
+    update_cache: yes
+  when: repository.changed == True
+
 - name: Install deb packages with apt-get
   apt:
     name: "{{ pkg_apt }}"
-    update_cache: yes
 
 - name: Download files
   get_url:

@@ -14,6 +14,7 @@
     repo: "{{ item.repo }}"
     filename: "{{ item.filename }}"
     update_cache: no
+  register: repository
   with_items:
     - { repo: "deb http://ppa.launchpad.net/git-core/ppa/ubuntu xenial main", filename: "git" }
     - { repo: "deb http://packagecloud.io/slacktechnologies/slack/debian/ jessie main", filename: "slack" }
