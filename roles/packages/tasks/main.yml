@@ -1,10 +1,8 @@
 ---
 - name: Install deb packages with apt-get
   apt:
-    name: "{{ item }}"
+    name: "{{ pkg_apt }}"
     update_cache: yes
-  with_items:
-    - "{{ pkg_apt }}"
 
 - name: Download files
   get_url:
@@ -35,8 +33,6 @@
 
 - name: Install python packages
   pip:
-    name: "{{ item }}"
+    name: "{{ pkg_pip }}"
     extra_args: --user
   become: False
-  with_items:
-    - "{{ pkg_pip }}"
