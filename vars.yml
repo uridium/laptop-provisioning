@@ -3,7 +3,7 @@ virtualbox_pack_url: "http://download.virtualbox.org/virtualbox/{{ virtualbox_ve
 vagrant_version: "1.9.7"
 vagrant_url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_{{ ansible_architecture }}.deb"
 
-tmpdir: /tmp
+tmpdir: /var/tmp
 
 pkg_apt:
   - apt-file
