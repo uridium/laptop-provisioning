@@ -2,7 +2,7 @@
 - name: Update repo indexes
   apt:
     update_cache: yes
-  when: repository.changed == True
+  when: repository | changed
 
 - name: Install deb packages with apt-get
   apt:
