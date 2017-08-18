@@ -16,11 +16,9 @@
     - "{{ vagrant_url }}"
     - "{{ virtualbox_pack_url }}"
 
-- name: Install deb packages with dpkg
+- name: Install Vagrant
   apt:
-    deb: "{{ item }}"
-  with_items:
-    - "{{ tmpdir }}/{{ vagrant_url | basename }}"
+    deb: "{{ tmpdir }}/{{ vagrant_url | basename }}"
 
 - name: Check if VirtualBox Extension pack is installed
   shell: >
