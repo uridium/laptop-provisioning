@@ -3,10 +3,15 @@
   apt:
     update_cache: yes
   when: repository | changed
+  tags:
+    - apt
 
 - name: Install deb packages with apt-get
   apt:
     name: "{{ pkg_apt }}"
+  tags:
+    - apt
+    - packages-apt
 
 - name: Download files
   get_url:
@@ -15,10 +20,16 @@
   with_items:
     - "{{ vagrant_url }}"
     - "{{ virtualbox_pack_url }}"
+  tags:
+    - apt
+    - vagrant
 
 - name: Install Vagrant
   apt:
     deb: "{{ tmpdir }}/{{ vagrant_url | basename }}"
+  tags:
+    - apt
+    - vagrant
 
 - name: Check if VirtualBox Extension pack is installed
   shell: >
@@ -26,15 +37,23 @@
   register: extension_is_installed
   changed_when: extension_is_installed.rc == 1
   failed_when: extension_is_installed.rc == 2 or extension_is_installed.stderr != ""
+  tags:
+    - apt
+    - vagrant
 
 - name: Install VirtualBox Extension Pack
   shell: >
     yes y | vboxmanage extpack install {{ tmpdir }}/{{ virtualbox_pack_url | basename }}
   no_log: True
   when: extension_is_installed.rc == 1
+  tags:
+    - apt
+    - vagrant
 
 - name: Install python packages
   pip:
     name: "{{ pkg_pip }}"
     extra_args: --user
   become: False
+  tags:
+    - packages-pip

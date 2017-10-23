@@ -8,6 +8,8 @@
     - DB085A08CA13B8ACB917E0F6D938EC0D038651BD # slack
     - 58118E89F3A912897C070ADBF76221572C52609D # docker
     - B9F8D658297AF3EFC18D5CDFA2F683C52980AECF # virtualbox
+  tags:
+    - apt
 
 - name: Add apt repository
   apt_repository:
@@ -20,3 +22,5 @@
     - { repo: "deb http://packagecloud.io/slacktechnologies/slack/debian/ jessie main", filename: "slack" }
     - { repo: "deb http://apt.dockerproject.org/repo ubuntu-xenial main", filename: "docker" }
     - { repo: "deb http://download.virtualbox.org/virtualbox/debian xenial contrib", filename: "virtualbox" }
+  tags:
+    - apt

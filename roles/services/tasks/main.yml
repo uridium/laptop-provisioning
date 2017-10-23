@@ -8,6 +8,8 @@
   with_items:
     - vacuum
     - reindex
+  tags:
+    - cron
 
 - name: Configure rng-tools
   lineinfile:
@@ -15,3 +17,5 @@
     regexp: "^HRNGDEVICE="
     line: "HRNGDEVICE=/dev/urandom"
   notify: restart-rng-tools
+  tags:
+    - rng
