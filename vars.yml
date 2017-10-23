@@ -1,4 +1,4 @@
-virtualbox_version: "5.2.0-118431"
+virtualbox_version: "5.1.30-118389"
 virtualbox_version_short: "{{ virtualbox_version | regex_replace('^(.*)-.*', '\\1') }}" # https://regex101.com/r/hQe424/2
 virtualbox_url_deb: "http://download.virtualbox.org/virtualbox/{{ virtualbox_version_short }}/virtualbox-{{ virtualbox_version_short | regex_replace('.([^.]+)$') }}_{{ virtualbox_version }}~Ubuntu~xenial_amd64.deb" # https://regex101.com/r/hQe424/1
 virtualbox_url_pack: "http://download.virtualbox.org/virtualbox/{{ virtualbox_version_short }}/Oracle_VM_VirtualBox_Extension_Pack-{{ virtualbox_version }}.vbox-extpack"
