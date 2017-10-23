@@ -37,6 +37,7 @@ pkg_apt:
   - wireshark
 
 pkg_pip:
+  - ansible-lint
   - awscli
   - awsebcli
   - aws-tools
