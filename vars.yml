@@ -1,7 +1,10 @@
 virtualbox_version: "5.1.26-117224"
-virtualbox_pack_url: "http://download.virtualbox.org/virtualbox/{{ virtualbox_version | regex_replace('^(.*)-.*', '\\1') }}/Oracle_VM_VirtualBox_Extension_Pack-{{ virtualbox_version }}.vbox-extpack"
+virtualbox_version_short: "{{ virtualbox_version | regex_replace('^(.*)-.*', '\\1') }}" # https://regex101.com/r/hQe424/2
+virtualbox_url_deb: "http://download.virtualbox.org/virtualbox/{{ virtualbox_version_short }}/virtualbox-{{ virtualbox_version_short | regex_replace('.([^.]+)$') }}_{{ virtualbox_version }}~Ubuntu~xenial_amd64.deb" # https://regex101.com/r/hQe424/1
+virtualbox_url_pack: "http://download.virtualbox.org/virtualbox/{{ virtualbox_version_short }}/Oracle_VM_VirtualBox_Extension_Pack-{{ virtualbox_version }}.vbox-extpack"
+
 vagrant_version: "1.9.7"
-vagrant_url: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_{{ ansible_architecture }}.deb"
+vagrant_url_deb: "https://releases.hashicorp.com/vagrant/{{ vagrant_version }}/vagrant_{{ vagrant_version }}_{{ ansible_architecture }}.deb"
 
 tmpdir: /var/tmp
 
@@ -30,7 +33,6 @@ pkg_apt:
   - terminator
   - tree
   - vim
-  - virtualbox-5.1={{ virtualbox_version }}~Ubuntu~xenial
   - whois
   - wireshark
 

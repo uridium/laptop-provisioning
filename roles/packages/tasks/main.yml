@@ -18,15 +18,19 @@
     url: "{{ item }}"
     dest: "{{ tmpdir }}/{{ item | basename }}"
   with_items:
-    - "{{ vagrant_url }}"
-    - "{{ virtualbox_pack_url }}"
+    - "{{ vagrant_url_deb }}"
+    - "{{ virtualbox_url_deb }}"
+    - "{{ virtualbox_url_pack }}"
   tags:
     - apt
     - vagrant
 
 - name: Install Vagrant
   apt:
-    deb: "{{ tmpdir }}/{{ vagrant_url | basename }}"
+    deb: "{{ item }}"
+  with_items:
+      - "{{ tmpdir }}/{{ vagrant_url_deb | basename }}"
+      - "{{ tmpdir }}/{{ virtualbox_url_deb | basename }}"
   tags:
     - apt
     - vagrant
@@ -43,7 +47,7 @@
 
 - name: Install VirtualBox Extension Pack
   shell: >
-    yes y | vboxmanage extpack install {{ tmpdir }}/{{ virtualbox_pack_url | basename }}
+    yes y | vboxmanage extpack install {{ tmpdir }}/{{ virtualbox_url_pack | basename }}
   no_log: True
   when: extension_is_installed.rc == 1
   tags:

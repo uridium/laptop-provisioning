@@ -7,7 +7,6 @@
     - E1DD270288B4E6030699E45FA1715D88E1DF1F24 # git
     - DB085A08CA13B8ACB917E0F6D938EC0D038651BD # slack
     - 58118E89F3A912897C070ADBF76221572C52609D # docker
-    - B9F8D658297AF3EFC18D5CDFA2F683C52980AECF # virtualbox
   tags:
     - apt
 
@@ -21,6 +20,5 @@
     - { repo: "deb http://ppa.launchpad.net/git-core/ppa/ubuntu xenial main", filename: "git" }
     - { repo: "deb http://packagecloud.io/slacktechnologies/slack/debian/ jessie main", filename: "slack" }
     - { repo: "deb http://apt.dockerproject.org/repo ubuntu-xenial main", filename: "docker" }
-    - { repo: "deb http://download.virtualbox.org/virtualbox/debian xenial contrib", filename: "virtualbox" }
   tags:
     - apt
