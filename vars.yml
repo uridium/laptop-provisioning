@@ -41,6 +41,7 @@ pkg_pip:
   - awscli
   - awsebcli
   - aws-tools
+  - docker-compose
   - pip
   - pyotp
   - pyperclip

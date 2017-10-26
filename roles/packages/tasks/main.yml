@@ -61,3 +61,10 @@
   become: False
   tags:
     - packages-pip
+
+- name: Install docker-compose bash completion
+  get_url:
+    url: https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose
+    dest: /etc/bash_completion.d/
+  tags:
+    - packages-pip
